@@ -7,5 +7,9 @@ public class KafkaConstants {
 	public final static String CONFIG_BATCH_SIZE = "batchsize";
 	public final static String CONFIG_GROUP = "group";
 	public final static String CONFIG_RESET_OFFSET = "resetoffset";
+
+	public final static String CONFIG_AUTOCOMMIT_ENABLE = "autocommit";
+	public final static String CONFIG_AUTOCOMMIT_INTERVAL = "autocommit_interval";
+	public final static String CONFIG_AUTOOFFSET = "autooffset";
 }
 

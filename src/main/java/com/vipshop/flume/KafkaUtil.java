@@ -35,6 +35,15 @@ public class KafkaUtil {
 	private static String getZKTimeout(Context context) {
 		return context.getString(KafkaConstants.CONFIG_ZK_TIMEOUT, "15000");
 	}
+	private static String getAutoCommitEnable(Context context) {
+		return context.getString(KafkaConstants.CONFIG_AUTOCOMMIT_ENABLE, "false");
+	}
+	private static String getAutoOffsetReset(Context context) {
+		return context.getString(KafkaConstants.CONFIG_AUTOOFFSET, "largest");
+	}
+	private static String getAutoCommitInterval(Context context) {
+		return context.getString(KafkaConstants.CONFIG_AUTOCOMMIT_INTERVAL, "10000");
+	}
 	public static Producer<String, String> getProducer(Context context) {
 		Producer<String, String> producer;
 		Properties props = new Properties();
@@ -54,10 +63,11 @@ public class KafkaUtil {
 		props.put("zk.connect", getZkConnect(context));
 		props.put("zk.sessiontimeout.ms", "60000");
 		props.put("groupid", getGroup(context));
-		props.put("autocommit.enable", "false");
+		props.put("autocommit.enable", getAutoCommitEnable(context));
+		props.put("autocommit.interval.ms", getAutoCommitInterval(context));
 		props.put("queuedchunks.max", "1000");
 		props.put("batch.size", getBatchSize(context));
-		props.put("autooffset.reset", "largest");
+		props.put("autooffset.reset", getAutoOffsetReset(context));
 		props.put("socket.buffersize", "10240000");
 		props.put("socket.timeout.ms", "60000");
 		ConsumerConfig consumerConfig = new ConsumerConfig(props);
