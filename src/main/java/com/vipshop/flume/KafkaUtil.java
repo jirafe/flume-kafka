@@ -14,12 +14,9 @@ import org.apache.zookeeper.KeeperException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public class KafkaUtil {
 	private static final Logger log = LoggerFactory.getLogger(KafkaUtil.class);
-	/**
-	 * @param args
-	 */
+
 	public static String getZkConnect(Context context) {
 		return context.getString(KafkaConstants.CONFIG_ZK_CONNECT);
 	}
@@ -47,7 +44,7 @@ public class KafkaUtil {
 		props.put("batch.size", getBatchSize(context));
 		props.put("zk.sessiontimeout.ms", "15000");
 		props.put("queue.size", "1000000");
-		
+
 		producer = new Producer<String, String>(new ProducerConfig(props));
 		log.debug("-----------return producer");
 		return producer;
@@ -56,7 +53,6 @@ public class KafkaUtil {
 		Properties props = new Properties();
 		props.put("zk.connect", getZkConnect(context));
 		props.put("zk.sessiontimeout.ms", "60000");
-//		props.put("fetch.size", String.valueOf(Integer.parseInt((getBatchSize(context))) * 300 * 1024));
 		props.put("groupid", getGroup(context));
 		props.put("autocommit.enable", "false");
 		props.put("queuedchunks.max", "1000");
@@ -70,20 +66,4 @@ public class KafkaUtil {
 		return consumer;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

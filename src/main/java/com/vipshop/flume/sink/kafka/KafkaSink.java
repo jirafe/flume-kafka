@@ -19,7 +19,7 @@ public class KafkaSink extends AbstractSink implements Configurable{
 	private static final Logger log = LoggerFactory.getLogger(KafkaSink.class);
 	private String topic;
 	private Producer<String, String> producer;
-	
+
 	public Status process() throws EventDeliveryException {
 		log.trace("------------------------------------proccessing...");
 		Channel channel = getChannel();
@@ -68,3 +68,4 @@ public class KafkaSink extends AbstractSink implements Configurable{
 		super.stop();
 	}
 }
+
