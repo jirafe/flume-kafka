@@ -17,14 +17,15 @@ import org.slf4j.LoggerFactory;
 public class KafkaUtil {
 	private static final Logger log = LoggerFactory.getLogger(KafkaUtil.class);
 
-	private static String getZkConnect(Context context) {
-		return context.getString(KafkaConstants.CONFIG_ZK_CONNECT);
-	}
-	private static String getTopic(Context context) {
+	public static String getTopic(Context context) {
 		return context.getString(KafkaConstants.CONFIG_TOPIC);
 	}
 	private static String getBatchSize(Context context) {
 		return context.getString(KafkaConstants.CONFIG_BATCH_SIZE, "200");
+	}
+
+	private static String getZkConnect(Context context) {
+		return context.getString(KafkaConstants.CONFIG_ZK_CONNECT);
 	}
 	private static String getGroup(Context context) {
 		return context.getString(KafkaConstants.CONFIG_GROUP);
