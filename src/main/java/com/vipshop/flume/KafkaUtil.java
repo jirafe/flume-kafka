@@ -20,7 +20,7 @@ public class KafkaUtil {
 	public static String getTopic(Context context) {
 		return context.getString(KafkaConstants.CONFIG_TOPIC);
 	}
-	private static String getBatchSize(Context context) {
+	public static String getBatchSize(Context context) {
 		return context.getString(KafkaConstants.CONFIG_BATCH_SIZE, "200");
 	}
 
@@ -44,6 +44,9 @@ public class KafkaUtil {
 	}
 	private static String getAutoCommitInterval(Context context) {
 		return context.getString(KafkaConstants.CONFIG_AUTOCOMMIT_INTERVAL, "10000");
+	}
+	public static String getConsumerTimeout(Context context) {
+		return context.getString(KafkaConstants.CONFIG_CONSUMER_TIMEOUT, "-1");
 	}
 	public static Producer<String, String> getProducer(Context context) {
 		Producer<String, String> producer;
@@ -71,6 +74,7 @@ public class KafkaUtil {
 		props.put("autooffset.reset", getAutoOffsetReset(context));
 		props.put("socket.buffersize", "10240000");
 		props.put("socket.timeout.ms", "60000");
+		props.put("consumer.timeout.ms", getConsumerTimeout(context));
 		ConsumerConfig consumerConfig = new ConsumerConfig(props);
 		ConsumerConnector consumer = Consumer.createJavaConsumerConnector(consumerConfig);
 		log.debug("-----------return consumer");

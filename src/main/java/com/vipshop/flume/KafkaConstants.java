@@ -11,5 +11,7 @@ public class KafkaConstants {
 	public final static String CONFIG_AUTOCOMMIT_ENABLE = "autocommit";
 	public final static String CONFIG_AUTOCOMMIT_INTERVAL = "autocommit_interval";
 	public final static String CONFIG_AUTOOFFSET = "autooffset";
+
+	public final static String CONFIG_CONSUMER_TIMEOUT = "consumer_timeout";
 }
 
