@@ -42,6 +42,7 @@ public class KafkaSource extends AbstractSource implements Configurable, Pollabl
 	}
 
 	public Status process() throws EventDeliveryException {
+		try {
 		// TODO Auto-generated method stub
 		ArrayList<Event> eventList = new ArrayList<Event>();
 		Message message;
@@ -49,9 +50,9 @@ public class KafkaSource extends AbstractSource implements Configurable, Pollabl
 		ByteBuffer buffer;
 		Map<String, String> headers;
 		byte [] bytes;
-		Status retval = Status.READY;
-		try {
-			for(int i = 0; i < batchSize; i++){
+		for(int i = 0; i < batchSize; i++){
+			if(it.hasNext()) {
+				log.trace("-----------------has next");
 				message = it.next().message();
 				event = new SimpleEvent();
 				buffer = message.payload();
@@ -64,15 +65,15 @@ public class KafkaSource extends AbstractSource implements Configurable, Pollabl
 				log.trace(new String(bytes));
 				eventList.add(event);
 			}
-		} catch (Exception e) {
-			retval = Status.BACKOFF;
+		log.trace("----------------event list add done");
 		}
-		try {
-			getChannelProcessor().processEventBatch(eventList);
+		getChannelProcessor().processEventBatch(eventList);
+		log.trace("------------------process event batch");
+		return Status.READY;
 		} catch (Exception e) {
-			retval = Status.BACKOFF;
+			log.debug("-----process exception: " + e);
+			return Status.BACKOFF;
 		}
-		return retval;
 	}
 
 	public void configure(Context context) {
@@ -94,9 +95,9 @@ public class KafkaSource extends AbstractSource implements Configurable, Pollabl
 		Map<String, Integer> topicCountMap = new HashMap<String, Integer>();
 		topicCountMap.put(topic, new Integer(1));
 		Map<String, List<KafkaStream<Message>>> consumerMap = consumer.createMessageStreams(topicCountMap);
-		KafkaStream<Message> stream =  consumerMap.get(topic).get(0);
-		it = stream.iterator();
-		log.warn("INIT IT DONE");
+	    KafkaStream<Message> stream =  consumerMap.get(topic).get(0);
+	    it = stream.iterator();
+	    log.debug("-------------init it done");
 	}
 
 	@Override

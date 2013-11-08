@@ -24,25 +24,25 @@ public class KafkaUtil {
 		return context.getString(KafkaConstants.CONFIG_BATCH_SIZE, "200");
 	}
 
-	private static String getZkConnect(Context context) {
+	public static String getZkConnect(Context context) {
 		return context.getString(KafkaConstants.CONFIG_ZK_CONNECT);
 	}
-	private static String getGroup(Context context) {
+	public static String getGroup(Context context) {
 		return context.getString(KafkaConstants.CONFIG_GROUP);
 	}
-	private static String getResetOffset(Context context) {
+	public static String getResetOffset(Context context) {
 		return context.getString(KafkaConstants.CONFIG_RESET_OFFSET, "no");
 	}
-	private static String getZKTimeout(Context context) {
+	public static String getZKTimeout(Context context) {
 		return context.getString(KafkaConstants.CONFIG_ZK_TIMEOUT, "15000");
 	}
-	private static String getAutoCommitEnable(Context context) {
+	public static String getAutoCommitEnable(Context context) {
 		return context.getString(KafkaConstants.CONFIG_AUTOCOMMIT_ENABLE, "false");
 	}
-	private static String getAutoOffsetReset(Context context) {
+	public static String getAutoOffsetReset(Context context) {
 		return context.getString(KafkaConstants.CONFIG_AUTOOFFSET, "largest");
 	}
-	private static String getAutoCommitInterval(Context context) {
+	public static String getAutoCommitInterval(Context context) {
 		return context.getString(KafkaConstants.CONFIG_AUTOCOMMIT_INTERVAL, "10000");
 	}
 	public static String getConsumerTimeout(Context context) {
